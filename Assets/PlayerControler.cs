@@ -11,6 +11,7 @@ public class PlayerControler : MonoBehaviour
     private Vector2 controlls;
     private Transform gunLeft, gunRight;
     private bool fireButtonDown = false;
+    private camerascript cs;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class PlayerControler : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gunLeft = transform.Find("gunLeft");
         gunRight = transform.Find("gunRight");
+        cs = Camera.main.GetComponent<camerascript>();
     }
 
     // Update is called once per frame
@@ -28,15 +30,17 @@ public class PlayerControler : MonoBehaviour
         v = Input.GetAxis("Vertical");
         h = Input.GetAxis("Horizontal");
         controlls = new Vector2(h, v);
+        float maxHorizontal = cs.worldWidth / 2;
+        float maxVertical = cs.worldHeight / 2;
 
-        if (Math.Abs(transform.position.x) > 19)
+        if (Math.Abs(transform.position.x) > maxHorizontal)
         {
-            Vector3 newPosition = new Vector3(transform.position.x * -1, 0, transform.position.z);
+            Vector3 newPosition = new Vector3(transform.position.x * -0.95f, 0, transform.position.z);
             transform.position = newPosition;
         }
-        if (Math.Abs(transform.position.z) > 9)
+        if (Math.Abs(transform.position.z) > maxVertical)
         {
-            Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z * -1);
+            Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z * -0.95f);
             transform.position = newPosition;
         }
         if (Input.GetKeyDown(KeyCode.Space))
