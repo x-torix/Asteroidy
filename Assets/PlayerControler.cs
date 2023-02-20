@@ -70,4 +70,9 @@ public class PlayerControler : MonoBehaviour
             fireButtonDown = false;
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+            GameObject other= collision.gameObject;
+        if (other.Compare) { }
+    }
 }

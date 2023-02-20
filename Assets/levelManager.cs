@@ -23,13 +23,14 @@ public class levelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnTimer -=Time.deltaTime;
-        if (spawnTimer < 0) 
-        { 
-        Spawn();
-            spawnTimer= spawnInterval;
+        maxHorizontal = (cs.worldWidth / 2) * 1.2f;
+        maxVertical = (cs.worldHeight / 2) * 1.2f;
+        spawnTimer -= Time.deltaTime;
+        if (spawnTimer < 0)
+        {
+            Spawn();
+            spawnTimer = spawnInterval;
         }
-
 
     }
 
