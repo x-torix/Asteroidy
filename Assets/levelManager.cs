@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class levelManager : MonoBehaviour
 {
-
     camerascript cs;
     private float maxHorizontal, maxVertical;
     private float spawnTimer, spawnInterval;
@@ -14,8 +14,8 @@ public class levelManager : MonoBehaviour
     void Start()
     {
         cs = Camera.main.GetComponent<camerascript>();
-        maxHorizontal = (cs.worldWidth / 2) * 1.2f;
-        maxVertical = (cs.worldHeight / 2) * 1.2f;
+
+
         spawnInterval = 3;
         spawnTimer = spawnInterval;
     }
@@ -31,24 +31,21 @@ public class levelManager : MonoBehaviour
             Spawn();
             spawnTimer = spawnInterval;
         }
-
     }
-
-   void Spawn ()
+    void Spawn()
     {
         float randomX, randomZ;
         if (Mathf.Round(Random.Range(0, 1)) == 0)
         {
             randomZ = randomSign() * maxVertical;
             randomX = Random.Range(0, maxHorizontal);
-
         }
         else
         {
             randomX = randomSign() * maxHorizontal;
             randomZ = Random.Range(0, maxVertical);
         }
-        Vector3 spawnPoint = new Vector3(randomX, 0, randomZ); 
+        Vector3 spawnPoint = new Vector3(randomX, 0, randomZ);
         Instantiate(asteroidPrefab, spawnPoint, Quaternion.identity);
     }
     int randomSign()
@@ -56,6 +53,5 @@ public class levelManager : MonoBehaviour
         int[] numbers = { -1, 1 };
         int randomIndex = Random.Range(0, numbers.Length);
         return numbers[randomIndex];
-
     }
 }

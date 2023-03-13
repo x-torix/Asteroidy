@@ -9,9 +9,11 @@ public class asteroidscript : MonoBehaviour
     void Start()
     {
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-        //transform.LookAt(player);
+
+
         Vector3 playerVector = player.position - transform.position;
         transform.GetComponent<Rigidbody>().AddForce(playerVector.normalized * speed, ForceMode.VelocityChange);
+
         Vector3 randomVector = new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90));
         transform.GetComponent<Rigidbody>().AddTorque(randomVector);
     }
@@ -20,5 +22,16 @@ public class asteroidscript : MonoBehaviour
     void Update()
     {
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Bullet"))
+        {
+
+            Destroy(other);
+
+            Destroy(gameObject);
+        }
     }
 }
